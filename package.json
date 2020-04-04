@@ -1,0 +1,27 @@
+{
+  "name": "lincps",
+  "version": "1.0.5",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "lincps": "dist/lincps.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andriyor/lincps"
+  },
+  "keywords": [],
+  "author": "Andriy Orehov",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^13.11.0",
+    "cheerio": "^1.0.0-rc.3",
+    "meow": "^6.1.0",
+    "playwright-chromium": "^0.12.1",
+    "progress": "^2.0.3",
+    "typescript": "^3.8.3"
+  }
+}
