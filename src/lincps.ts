@@ -5,7 +5,7 @@ const fs = require("fs");
 const meow = require('meow');
 const cheerio = require('cheerio');
 const ProgressBar = require('progress');
-const playwright = require('playwright-chromium');
+import * as playwright from 'playwright-chromium'
 
 const cli = meow(`
 	Examples
@@ -137,12 +137,12 @@ function printResult(result) {
     }
   }
   await page.click('a[data-control-name="topcard_see_all_employees"]');
-  await page.waitFor('footer');
+  await page.waitForSelector('footer');
   const footer = await page.$('footer');
   await footer.scrollIntoViewIfNeeded();
-  await page.waitFor(1000);
+  await page.waitForTimeout(1000);
   const TOTAL_PAGES_SELECTOR = 'ul.artdeco-pagination__pages li:last-child button span';
-  await page.waitFor(TOTAL_PAGES_SELECTOR);
+  await page.waitForSelector(TOTAL_PAGES_SELECTOR);
   const pageContent = await page.content();
   const $page = cheerio.load(pageContent);
   const totalPages = $page(TOTAL_PAGES_SELECTOR).text().trim();
@@ -153,16 +153,16 @@ function printResult(result) {
 
   async function parsePage() {
     const EMPLOYEE_LIST_SELECTOR = 'ul.search-results__list li';
-    await page.waitFor(EMPLOYEE_LIST_SELECTOR)
+    await page.waitForSelector(EMPLOYEE_LIST_SELECTOR)
     const hrefElement5 = await page.$('ul.search-results__list li:nth-child(5)');
     if (hrefElement5) {
       await hrefElement5.scrollIntoViewIfNeeded();
-      await page.waitFor(1000);
+      await page.waitForTimeout(1000);
     }
     const hrefElement10 = await page.$('ul.search-results__list li:nth-child(10)');
     if (hrefElement10) {
       await hrefElement10.scrollIntoViewIfNeeded();
-      await page.waitFor(1000);
+      await page.waitForTimeout(1000);
     }
 
     const pageContent = await page.content();
